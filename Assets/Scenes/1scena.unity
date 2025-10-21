@@ -286,7 +286,7 @@ Transform:
   m_GameObject: {fileID: 549617971}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.004, y: -0.409, z: -0.013397449}
+  m_LocalPosition: {x: 0.54, y: -1.77, z: -0.013397449}
   m_LocalScale: {x: 0.83406645, y: 0.3440524, z: 0.83406645}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -338,7 +338,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.6781049, y: -2.8932416}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -349,7 +349,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 6.9130554, y: 6.7864833}
   m_EdgeRadius: 0
 --- !u!1 &569990400
 GameObject:
@@ -403,18 +403,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.001938343, y: 0.23593056}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
+    oldSize: {x: 6.1, y: 7}
+    newSize: {x: 6.1, y: 7}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 6.087014, y: 6.384342}
   m_EdgeRadius: 0
 --- !u!50 &569990402
 Rigidbody2D:
@@ -484,12 +484,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.8679245, g: 0.3479886, b: 0.555638, a: 1}
+  m_Sprite: {fileID: 21300000, guid: e504140121bb85e46aa2e09706286db5, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 6.1, y: 7}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -505,7 +505,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.81, y: -3.1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.12495, y: 0.12495, z: 0.12495}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 549617972}
@@ -523,10 +523,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b44e9476b18b6b4ca02c9dcc0014017, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 800
+  moveSpeed: 200
+  runSpeed: 400
   moveInput: 0
-  jumpForce: 400
+  jumpForce: 300
   isJump: 0
+  isRun: 0
   rb: {fileID: 569990402}
   sprite: {fileID: 569990403}
   groundChecker: {fileID: 549617973}
