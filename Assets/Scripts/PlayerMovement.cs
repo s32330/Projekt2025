@@ -9,12 +9,17 @@ public class PlayerMovement : MonoBehaviour
     public float runSpeed = 800;
     public float moveInput = 0;
     public float jumpForce = 300;
+
     public bool isJump = false;
     public bool isRun = false;
+
+    public int maxJumps = 2;
+    private int jumpCount = 0;
 
     public Rigidbody2D rb;
     public SpriteRenderer sprite;
     public GroundChecker groundChecker;
+
     // start zeby podlinkowac obiekty do naszego kodu
     void Start()
     {
@@ -28,9 +33,10 @@ public class PlayerMovement : MonoBehaviour
         moveInput = Input.GetAxis("Horizontal");
 
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        { 
-            isJump = true; 
+
+        if (Input.GetKeyDown(KeyCode.Space) && jumpCount < maxJumps)
+        {
+            isJump = true;
         }
 
         if (Input.GetKey(KeyCode.LeftShift))
@@ -44,6 +50,10 @@ public class PlayerMovement : MonoBehaviour
     //FixedUpdate zalezy od ilosci sekund (co 0.02 sek) a nie klatek
     private void FixedUpdate()
     {
+        if (groundChecker.isGrounded && !isJump && rb.velocity.y <= 0.1f)
+        {
+            jumpCount = 0;
+        }
 
         if (moveInput > 0)
         {
@@ -61,13 +71,17 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = new Vector2(moveInput * runSpeed * Time.deltaTime, rb.velocity.y);
             isRun = false;
         }
-        
 
-        if (isJump && groundChecker.isGrounded)
+
+        if (isJump)
         {
-            rb.AddForce(Vector2.up * jumpForce);
+            rb.velocity = new Vector2(rb.velocity.x, 0);
+            rb.AddForce(Vector2.up * jumpForce); jumpCount++;
             isJump = false;
+
         }
-        
+
+       
+
     }
 }
