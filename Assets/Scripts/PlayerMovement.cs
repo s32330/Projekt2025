@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Animations;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -19,18 +20,34 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody2D rb;
     public SpriteRenderer sprite;
     public GroundChecker groundChecker;
+    public Animator anim;
 
     // start zeby podlinkowac obiekty do naszego kodu
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
+        anim = GetComponent<Animator>();
     }
 
 
     void Update()
     {
         moveInput = Input.GetAxis("Horizontal");
+
+        if(moveInput !=0)
+        {
+           anim.SetFloat("IsMove",1);
+        }
+        else { 
+            anim.SetFloat("IsMove",-1); 
+        }
+
+        if (isJump)
+        {
+            anim.SetBool("IsJump", true);
+        }
+        else { anim.SetBool("IsJump", false); }
 
 
 
