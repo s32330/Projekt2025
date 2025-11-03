@@ -22,6 +22,8 @@ public class PlayerMovement : MonoBehaviour
     public GroundChecker groundChecker;
     public Animator anim;
 
+    private bool canDoubleJump = true;
+
     // start zeby podlinkowac obiekty do naszego kodu
     void Start()
     {
@@ -33,14 +35,18 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        anim.SetFloat("VerticalVelocity", rb.velocity.y);
+        anim.SetBool("IsGrounded", groundChecker.isGrounded);
+
         moveInput = Input.GetAxis("Horizontal");
 
-        if(moveInput !=0)
+        if (moveInput != 0)
         {
-           anim.SetFloat("IsMove",1);
+            anim.SetFloat("IsMove", 1);
         }
-        else { 
-            anim.SetFloat("IsMove",-1); 
+        else
+        {
+            anim.SetFloat("IsMove", -1);
         }
 
         if (isJump)
@@ -49,11 +55,43 @@ public class PlayerMovement : MonoBehaviour
         }
         else { anim.SetBool("IsJump", false); }
 
-
-
-        if (Input.GetKeyDown(KeyCode.Space) && jumpCount < maxJumps)
+       
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            isJump = true;
+            if (groundChecker.isGrounded)
+            {
+                isJump = true;
+                jumpCount = 1;
+                canDoubleJump = true;
+            }
+            else if (canDoubleJump)
+            {
+                isJump = true;
+                jumpCount = 2;
+                canDoubleJump = false;
+            }
+        }
+
+        if (!groundChecker.isGrounded)
+        {
+            if (jumpCount == 1)
+            {
+                anim.SetBool("IsJump", true);
+                anim.SetBool("IsDoubleJump", false);
+            }
+            else if (jumpCount == 2)
+            {
+                anim.SetBool("IsJump", false);
+                anim.SetBool("IsDoubleJump", true);
+            }
+        }
+        else
+        {
+            // reset po l¹dowaniu
+            jumpCount = 0;
+            anim.SetBool("IsJump", false);
+            anim.SetBool("IsDoubleJump", false);
+            canDoubleJump = true;
         }
 
         if (Input.GetKey(KeyCode.LeftShift))
@@ -61,8 +99,10 @@ public class PlayerMovement : MonoBehaviour
             isRun = true;
         }
 
-
     }
+
+
+
 
     //FixedUpdate zalezy od ilosci sekund (co 0.02 sek) a nie klatek
     private void FixedUpdate()
